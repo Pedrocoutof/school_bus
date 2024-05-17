@@ -31,6 +31,13 @@ const ToggleMenu = () => {
                     <p class="font-medium">Estudantes</p>
                 </button>
                 <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
+                <button class="flex justify-start items-center  text-gray-600 w-full hover:bg-gray-100">
+                    <span class="material-icons-outlined m-4">
+                        car_rental
+                    </span>
+                    <p class="font-medium">Motoristas</p>
+                </button>
+                <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
             </div>
             <button class="menu-toggle size-12 border-2 rounded-xl ml-6 bg-white hover:bg-gray-100" @click="ToggleMenu">
                 <span v-if="is_expanded" class="material-icons">menu</span>
