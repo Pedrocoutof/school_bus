@@ -29,7 +29,7 @@ const _title = props.title
 </script>
 
 <template>
-    <a :class="_class">
+    <a :class="_class" :href="props.href">
         <span class="material-icons-outlined m-4" v-html="_icon">
         </span>
         <p class="font-medium" v-html="_title"></p>

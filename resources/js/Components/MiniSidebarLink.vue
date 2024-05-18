@@ -16,17 +16,15 @@ const props = defineProps({
 });
 
 const _class = computed(() => props.active ?
-    "menu-toggle mt-3 size-12 border-2 rounded-xl ml-6 bg-white hover:bg-gray-100 border-indigo-700" :
-    "menu-toggle mt-3 size-12 border-2 rounded-xl ml-6 bg-white hover:bg-gray-100")
-
-const _icon = props.icon
+    "menu-toggle mt-3 text-gray-600 size-12 border-2 rounded-xl ml-6 bg-white hover:bg-gray-100 border-indigo-700" :
+    "menu-toggle mt-3 text-gray-600 size-12 border-2 rounded-xl ml-6 bg-white hover:bg-gray-100")
 
 </script>
 
 <template>
-    <button :class="_class" @click="ToggleMenu">
-        <span class="material-icons-outlined" v-html="_icon"></span>
-    </button>
+    <a :class="_class" :href="props.href">
+        <span class="material-icons-outlined" v-html="props.icon"></span>
+    </a>
 </template>
 
 <style scoped lang="scss">

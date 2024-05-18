@@ -27,17 +27,17 @@ const ToggleMenu = () => {
                 <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
                 <SidebarLink href="/" :active="route().current('drivers')" :title="'Motoristas'" :icon="'car_rental'"/>
             </div>
+            <div v-else>
+                <button class="menu-toggle size-12 border-2 rounded-xl ml-6 bg-white hover:bg-gray-100" @click="ToggleMenu">
+                    <span v-if="is_expanded" class="material-icons">menu</span>
+                    <span v-else class="material-icons">close</span>
+                </button>
 
-            <button class="menu-toggle size-12 border-2 rounded-xl ml-6 bg-white hover:bg-gray-100" @click="ToggleMenu">
-                <span v-if="is_expanded" class="material-icons">menu</span>
-                <span v-else class="material-icons">close</span>
-            </button>
-
-            <MiniSidebarLink icon="'dashboard'" href="/" :active="route().current('dashboard')"/>
-            <MiniSidebarLink icon="'directions_bus'" href="/busses" :active="route().current('busses')"/>
-            <MiniSidebarLink icon="'school'" href="/" :active="route().current('students')"/>
-            <MiniSidebarLink icon="'car_rental'" href="/" :active="route().current('drivers')"/>
-
+                <MiniSidebarLink icon="'dashboard'" href="/" :active="route().current('dashboard')"/>
+                <MiniSidebarLink icon="'directions_bus'" href="/busses" :active="route().current('busses')"/>
+                <MiniSidebarLink icon="'school'" href="/" :active="route().current('students')"/>
+                <MiniSidebarLink icon="'car_rental'" href="/" :active="route().current('drivers')"/>
+            </div>
 
 
         </div>
