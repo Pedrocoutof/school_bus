@@ -8,7 +8,6 @@ import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import {Link} from '@inertiajs/vue3';
 import Topbar from "@/Components/Topbar.vue";
 import Sidebar from "@/Components/Sidebar.vue";
-const showingNavigationDropdown = ref(false);
 </script>
 
 <template>

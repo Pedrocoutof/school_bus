@@ -133,6 +133,7 @@ import NavLink from "@/Components/NavLink.vue";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
 
+const showingNavigationDropdown = ref(false);
 const isMenuOpen = ref(false);
 
 const toggleMenu = () => {
