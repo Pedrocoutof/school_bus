@@ -9,6 +9,10 @@ Route::get('/', function () {
     return redirect(route('dashboard'));
 });
 
+Route::get('/drivers', function () {
+    return Inertia::render('Driver/index', []);
+});
+
 Route::get('/vue', function () {
     return Inertia::render('Welcome', []);
 });

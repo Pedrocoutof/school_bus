@@ -5,6 +5,7 @@ import MiniSidebarLink from "@/Components/MiniSidebarLink.vue";
 
 console.log(window.location.hash)
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
+console.log("Teste")
 const ToggleMenu = () => {
     is_expanded.value = !is_expanded.value
     localStorage.setItem("is_expanded", is_expanded.value)
@@ -20,13 +21,13 @@ const ToggleMenu = () => {
                     <span class="material-icons-outlined m-4">close</span><span class="font-medium">Fechar</span>
                 </button>
                 <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
-                <SidebarLink href="/" :active="route().current('dashboard')" :title="'Painel de controle'" :icon="'dashboard'"/>
+                <SidebarLink href="/dashboard" :active="route().current('dashboard')" :title="'Painel de controle'" :icon="'dashboard'"/>
                 <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
-                <SidebarLink href="/" :active="route().current('busses')" :title="'Ônibus'" :icon="'directions_bus'"/>
+                <SidebarLink href="/busses" :active="route().current('busses')" :title="'Ônibus'" :icon="'directions_bus'"/>
                 <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
-                <SidebarLink href="/" :active="route().current('students')" :title="'Estudantes'" :icon="'school'"/>
+                <SidebarLink href="/students" :active="route().current('students')" :title="'Estudantes'" :icon="'school'"/>
                 <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
-                <SidebarLink href="/" :active="route().current('drivers')" :title="'Motoristas'" :icon="'car_rental'"/>
+                <SidebarLink href="/drivers" :active="route().current('drivers')" :title="'Motoristas'" :icon="'car_rental'"/>
             </div>
             <div v-else>
                 <button class="menu-toggle size-12 border-2 rounded-xl ml-6 bg-white hover:bg-gray-100" @click="ToggleMenu">
@@ -34,12 +35,11 @@ const ToggleMenu = () => {
                     <span v-else class="material-icons">close</span>
                 </button>
 
-                <MiniSidebarLink icon="'dashboard'" href="/" :active="route().current('dashboard')"/>
-                <MiniSidebarLink icon="'directions_bus'" href="/busses" :active="route().current('busses')"/>
-                <MiniSidebarLink icon="'school'" href="/" :active="route().current('students')"/>
-                <MiniSidebarLink icon="'car_rental'" href="/" :active="route().current('drivers')"/>
+                <MiniSidebarLink icon="dashboard" href="/dashboard" :active="route().current('dashboard')"/>
+                <MiniSidebarLink icon="directions_bus" href="/busses" :active="route().current('busses')"/>
+                <MiniSidebarLink icon="school" href="/students" :active="route().current('students')"/>
+                <MiniSidebarLink icon="car_rental" href="/drivers" :active="route().current('drivers')"/>
             </div>
-
 
         </div>
     </aside>

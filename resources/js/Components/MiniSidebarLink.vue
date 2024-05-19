@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue';
+import { Link } from '@inertiajs/vue3'
 const props = defineProps({
     href: {
         type: String,
@@ -22,9 +23,9 @@ const _class = computed(() => props.active ?
 </script>
 
 <template>
-    <a :class="_class" :href="props.href">
+    <Link :class="_class" :href="props.href">
         <span class="material-icons-outlined" v-html="props.icon"></span>
-    </a>
+    </Link>
 </template>
 
 <style scoped lang="scss">
