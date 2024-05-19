@@ -17,7 +17,7 @@ const ToggleMenu = () => {
         <div class="menu-toggle-wrap flex items-start mt-3">
             <div v-if="!is_expanded" class="content shadow rounded-r-3xl ml-0 bg-white w-64 h-dvh">
 
-                <button class="flex justify-start items-center text-gray-600 w-full hover:bg-gray-100 border-l-4" @click="ToggleMenu">
+                <button class="flex justify-start items-center text-gray-600 w-full hover:bg-gray-100 border-l-4 border-transparent" @click="ToggleMenu">
                     <span class="material-icons-outlined m-4">close</span><span class="font-medium">Fechar</span>
                 </button>
                 <hr class="text-gray-400 h-0.5 w-4/5 m-auto">

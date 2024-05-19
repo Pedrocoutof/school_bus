@@ -23,7 +23,7 @@ const props = defineProps({
 
 const _class = computed(() => props.active ?
     "flex justify-start items-center w-full text-gray-600 hover:bg-gray-100 border-l-4 border-indigo-700" :
-    "flex justify-start items-center text-gray-600 w-full hover:bg-gray-100 border-l-4")
+    "flex justify-start items-center text-gray-600 w-full hover:bg-gray-100 border-l-4 border-transparent")
 
 const _icon = props.icon
 const _title = props.title
