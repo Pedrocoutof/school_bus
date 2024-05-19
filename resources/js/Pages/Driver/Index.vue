@@ -31,7 +31,7 @@ function switchComponent(componentName) {
                         </div>
                     </div>
                     <div class="flex items-center pr-6">
-                        <a href="#" class="p-2 text-gray-900 border-2 rounded-xl border-gray-300 hover:border-indigo-200" @click.prevent="switchComponent('create')">
+                        <a href="#" class="p-2 text-gray-900 border-2 rounded-xl border-gray-300 hover:border-indigo-400" @click.prevent="switchComponent('create')">
                             Adicionar motorista
                         </a>
                     </div>
