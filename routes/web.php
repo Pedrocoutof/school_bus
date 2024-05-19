@@ -19,7 +19,7 @@ Route::middleware(CheckMultipleGuards::class)->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-    Route::get('/drivers', function () { return Inertia::render('Driver/index'); });
+    Route::get('/drivers', function () { return Inertia::render('Driver/Index'); });
 
 });
 

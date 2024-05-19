@@ -5,7 +5,7 @@ import MiniSidebarLink from "@/Components/MiniSidebarLink.vue";
 
 console.log(window.location.hash)
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
-console.log("Teste")
+
 const ToggleMenu = () => {
     is_expanded.value = !is_expanded.value
     localStorage.setItem("is_expanded", is_expanded.value)
