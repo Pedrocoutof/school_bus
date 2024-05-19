@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -18,9 +19,7 @@ Route::middleware(CheckMultipleGuards::class)->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-
-    Route::get('/drivers', function () { return Inertia::render('Driver/Index'); });
-
+    Route::get('/drivers', [DriverController::class, 'index'])->name('drivers.index');
 });
 
 Route::get('/vue', function () {
