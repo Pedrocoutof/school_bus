@@ -1,13 +1,19 @@
 <script setup>
-import { usePage } from '@inertiajs/vue3';
-const { data, theads } = usePage().props;
 
-defineProps({
-    data: Array,
-    theads: Array
+import {ref, onMounted} from "vue";
+
+const theads = ref();
+const data = ref();
+
+onMounted(async () => {
+    try {
+        const response = await axios.get('http://127.0.0.1:8000/api/drivers');
+        theads.value = Object.keys(response.data[0]);
+        data.value = response.data
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
 });
-
-console.log(data)
 </script>
 
 <template>
@@ -18,12 +24,12 @@ console.log(data)
                 'rounded-tl-lg': index === 0,
                 'rounded-tr-lg': index === theads.length - 1,
             }"
-                class="text-gray-600 py-3 bg-gray-100">{{ thead.name }}</th>
+                class="text-gray-600 py-3 bg-gray-100">{{ thead }}</th>
         </tr>
         </thead>
         <tbody>
-            <tr v-for="(item, index) in data" :key="index">
-                <td v-for="(thead, index) in theads" :key="index" class="border-b border-slate-100 py-4">{{ item[thead.value] }}</td>
+            <tr v-for="(row, index) in data" :key="index">
+                <td v-for="(value, key) in row" class="border-b border-slate-100 py-4" :key="key">{{ value }}</td>
             </tr>
         </tbody>
     </table>
