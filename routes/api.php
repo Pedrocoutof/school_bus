@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/drivers', [DriverController::class, 'index'])->name('api.drivers.index');
+Route::post('/drivers/store', [DriverController::class, 'store'])->name('api.drivers.store');

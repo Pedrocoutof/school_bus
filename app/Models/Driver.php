@@ -14,6 +14,13 @@ class Driver extends Authenticatable
         'full_name',
         'email',
         'password',
+        'neighborhood',
+        'city',
+        'number',
+        'phone',
+        'public_place',
+        'state',
+        'zip_code',
     ];
 
     protected $hidden = [

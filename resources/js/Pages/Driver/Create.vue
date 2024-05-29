@@ -1,38 +1,61 @@
 <script setup>
-    function getZipcodeData(zipcode) {
-        axios({
-            method: "get",
-            url: "https://viacep.com.br/ws/"+ zipcode +"/json/",
-        }).then(function (response) {
-            fillFields(response.data)
+import { ref } from "vue";
+import axios from "axios";
+
+const props = defineProps(['switchComponent']);  // Receba a prop
+
+function getZipcodeData(zipcode) {
+    axios({
+        method: "get",
+        url: "https://viacep.com.br/ws/" + zipcode + "/json/",
+    }).then(function (response) {
+        fillFields(response.data);
+    });
+}
+
+const formData = ref({
+    full_name: '',
+    phone: '',
+    zip_code: '',
+    public_place: '',
+    neighborhood: '',
+    city: '',
+    state: ''
+});
+
+function fillFields(data) {
+    formData.value.public_place = data.logradouro ?? "";
+    formData.value.neighborhood = data.bairro ?? "";
+    formData.value.city = data.localidade ?? "";
+    formData.value.state = data.uf ?? "";
+}
+
+function searchZipCode() {
+    let _inputZipcode = document.getElementById('zipcode').value;
+
+    if (_inputZipcode.length === 8) {
+        getZipcodeData(_inputZipcode);
+    }
+}
+
+function submitForm() {
+    console.log(formData);
+    axios.post('http://127.0.0.1:8000/api/drivers/store', formData.value)
+        .then((response) => {
+            if (response.status === 201) {
+                props.switchComponent('index');
+            } else {
+                console.error('Erro ao adicionar motorista', response);
+            }
+        })
+        .catch((error) => {
+            console.error('Erro ao adicionar motorista', error);
         });
-    }
-
-    function fillFields(data) {
-        document.getElementById('public_place').value = data.logradouro ?? "";
-        document.getElementById('public_place').disabled = data.logradouro;
-
-        document.getElementById('neighborhood').value = data.bairro ?? "";
-        document.getElementById('neighborhood').disabled = data.logradouro;
-
-        document.getElementById('city').value = data.localidade ?? "";
-        document.getElementById('city').disabled = data.logradouro;
-
-        document.getElementById('state').value = data.uf ?? "";
-        document.getElementById('state').disabled = data.logradouro;
-    }
-    function searchZipCode() {
-        let _inputZipcode = document.getElementById('zipcode').value;
-
-        if (_inputZipcode.length === 8) {
-            getZipcodeData(_inputZipcode);
-        }
-    }
-
+}
 </script>
 
 <template>
-    <form action="">
+    <form id="form" @submit.prevent="submitForm" method="post">
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
                 <h2 class="text-base font-semibold leading-7 text-gray-900">Informações básicas</h2>
@@ -42,54 +65,54 @@
                     <div class="sm:col-span-3">
                         <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Nome completo</label>
                         <div class="mt-2">
-                            <input type="text" name="full_name" id="full_name" autocomplete="full_name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input v-model="formData.full_name" type="text" name="full_name" id="full_name" autocomplete="full_name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
                     <div class="sm:col-span-3">
                         <label for="phone" class="block text-sm font-medium leading-6 text-gray-900">Número de telefone</label>
                         <div class="mt-2">
-                            <input type="text" name="phone" id="phone" autocomplete="phone" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input  v-model="formData.phone"  type="text" name="phone" id="phone" autocomplete="phone" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
                     <div class="sm:col-span-1">
                         <label for="cep" class="block text-sm font-medium leading-6 text-gray-900">CEP</label>
                         <div class="mt-2">
-                            <input maxlength="8" @keyup="searchZipCode()" type="text" name="zipcode" id="zipcode" autocomplete="zipcode" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input  v-model="formData.zip_code"  maxlength="8" @keyup="searchZipCode()" type="text" name="zip_code" id="zipcode" autocomplete="zipcode" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
 
                     <div class="col-span-5">
                         <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Logradouro</label>
                         <div class="mt-2">
-                            <input type="text" name="public_place" id="public_place" autocomplete="public_place" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input type="text" v-model="formData.public_place" name="public_place"  id="public_place" autocomplete="public_place" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
 
                     <div class="sm:col-span-1">
                         <label for="region" class="block text-sm font-medium leading-6 text-gray-900">Estado</label>
                         <div class="mt-2">
-                            <input type="text" name="state" id="state" autocomplete="address-level1" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input type="text" v-model="formData.state" name="state" id="state" autocomplete="address-level1" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
 
                     <div class="sm:col-span-2">
                         <label for="region" class="block text-sm font-medium leading-6 text-gray-900">Bairro</label>
                         <div class="mt-2">
-                            <input type="text" name="neighborhood" id="neighborhood" autocomplete="address-level1" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input type="text" v-model="formData.neighborhood" name="neighborhood" id="neighborhood" autocomplete="address-level1" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
 
                     <div class="sm:col-span-2 sm:col-1">
                         <label for="city" class="block text-sm font-medium leading-6 text-gray-900">Cidade</label>
                         <div class="mt-2">
-                            <input type="text" name="city" id="city" autocomplete="address-level2" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input type="text" v-model="formData.city" name="city" id="city" autocomplete="address-level2" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
 
                     <div class="sm:col-span-1">
                         <label for="postal-code" class="block text-sm font-medium leading-6 text-gray-900">Número/referência</label>
                         <div class="mt-2">
-                            <input type="number" name="number" id="number" autocomplete="number" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input type="number" v-model="formData.number" name="number" id="number" autocomplete="number" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
                 </div>
@@ -102,7 +125,7 @@
                     <div class="sm:col-span-3">
                         <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email</label>
                         <div class="mt-2">
-                            <input type="email" name="email" id="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                            <input v-model="formData.email" type="email" name="email" id="email" autocomplete="email" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                         </div>
                     </div>
                     <div class="flex flex-col col-span-3">
@@ -110,7 +133,7 @@
                         <div class="sm:col-span-3">
                             <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Senha</label>
                             <div class="mt-2">
-                                <input type="password" name="password" id="password" autocomplete="password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                <input v-model="formData.password" required type="password" name="password" id="password" autocomplete="password" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
                             </div>
                         </div>
 

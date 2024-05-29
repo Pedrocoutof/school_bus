@@ -11,7 +11,7 @@ class StoreDriverRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,22 @@ class StoreDriverRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:drivers,email',
+            'phone' => 'required',
+            'password' => 'required',
+            'city' => 'required',
+            'zip_code' => 'required',
+            'public_place' => 'required',
+            'number' => 'required',
+            'neighborhood' => 'required',
+            'state' => 'required',
+        ];
+    }
+
+    public function messages(): array {
+        return [
+            'email.unique' => "Email já cadastrado."
         ];
     }
 }

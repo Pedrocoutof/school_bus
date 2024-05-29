@@ -21,6 +21,12 @@ class DriverFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
             'password' => bcrypt("12345678"),
+            'zip_code' => $this->faker->postcode(),
+            'public_place' => $this->faker->streetName(),
+            'state' => $this->faker->countryCode(),
+            'neighborhood' => $this->faker->streetSuffix(),
+            'city' => $this->faker->city(),
+            'number' => $this->faker->buildingNumber(),
         ];
     }
 }
