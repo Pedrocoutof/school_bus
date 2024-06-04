@@ -12,22 +12,9 @@ class DriverController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): \Inertia\Response
     {
-        $drivers = Driver::all();
-        return Inertia::render('Driver/Index', [
-            "theads" => [
-                [
-                    "name" => "Nome",
-                    "value" => "full_name"
-                ],
-                [
-                    "name" => "Email",
-                    "value" => "email"
-                ]
-            ],
-            "data" => $drivers
-        ]);
+        return Inertia::render('Driver/Index');
     }
 
     /**
