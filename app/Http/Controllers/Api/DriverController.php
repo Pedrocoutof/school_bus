@@ -29,7 +29,6 @@ class DriverController extends Controller
             $driver = Driver::create($validatedData);
             return response()->json($driver, 201);
         } catch (\Exception $e) {
-
             return response()->json(
                 ["error" => "Erro ao salvar o motorista.", "message" => $e->getMessage(), ],
                 500

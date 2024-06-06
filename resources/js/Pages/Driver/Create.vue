@@ -1,8 +1,10 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
+import InputForm from "@/Components/InputForm.vue";
+import InputError from "@/Components/InputError.vue";
 
-const props = defineProps(['switchComponent']);  // Receba a prop
+const props = defineProps(['switchComponent']);
 
 function getZipcodeData(zipcode) {
     axios({
@@ -66,19 +68,19 @@ function submitForm() {
 
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                     <div class="sm:col-span-3">
-                        <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Nome completo</label>
                         <div class="mt-2">
-                            <input v-model="formData.full_name" type="text" name="full_name" id="full_name" autocomplete="full_name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            <span v-if="errors.full_name" class="text-red-600 text-sm">{{ errors.full_name[0] }}</span>
+                            <InputForm :form="formData" name="full_name" label_text="Nome completo"></InputForm>
+                            <InputError v-if="errors && errors.full_name" :message="errors.full_name[0]"></InputError>
                         </div>
                     </div>
                     <div class="sm:col-span-3">
-                        <label for="phone" class="block text-sm font-medium leading-6 text-gray-900">Número de telefone</label>
+                        <label for="" class="block text-sm font-medium leading-6 text-gray-900"></label>
                         <div class="mt-2">
-                            <input  v-model="formData.phone"  type="text" name="phone" id="phone" autocomplete="phone" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                            <span v-if="errors.phone" class="text-red-600 text-sm">{{ errors.phone[0] }}</span>
+                            <InputForm :form="formData" name="phone" label_text="Número de telefone" type="number"></InputForm>
+                            <InputError v-if="errors && errors.phone" :message="errors.phone[0]"></InputError>
                         </div>
                     </div>
+
                     <div class="sm:col-span-1">
                         <label for="cep" class="block text-sm font-medium leading-6 text-gray-900">CEP</label>
                         <div class="mt-2">
@@ -161,8 +163,6 @@ function submitForm() {
                 </div>
 
             </div>
-
-
 
         </div>
 
