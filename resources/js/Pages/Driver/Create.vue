@@ -79,7 +79,7 @@ function handleSubmit() {
             <InputForm :form="formData" label="Complemento" name="complement" cols="col-span-2" :errors="errors" />
         </FormSection>
 
-        <FormSection class="mt-6" title="Informações de login" description="Insira as informações básicas de endereço do motorista.">
+        <FormSection class="mt-6" title="Informações de login" description="Insira as informações básicas de login do motorista.">
             <InputForm :form="formData" label="Email" type="email" name="email" cols="col-span-2" :errors="errors" />
             <div class="col-span-full"></div>
             <InputForm :form="formData" label="Senha" type="password" name="password" cols="col-span-2" :errors="errors" />

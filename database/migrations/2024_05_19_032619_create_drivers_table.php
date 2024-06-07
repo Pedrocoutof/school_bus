@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('public_place');
             $table->string('state');
             $table->string('neighborhood');
+            $table->string('complement')->nullable();
             $table->string('city');
             $table->string('number');
             $table->rememberToken();
