@@ -40,10 +40,6 @@ const formData = ref({
     city: '',
     state: ''
 });
-
-function search() {
-    formData.value.city = "Funciona!!"
-}
 function handleSubmit() {
     axios.post('http://127.0.0.1:8000/api/drivers/store', formData.value)
         .then((response) => {

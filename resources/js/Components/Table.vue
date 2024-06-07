@@ -7,14 +7,14 @@ const data = ref([]);
 const hasData = ref(false);
 
 const props = defineProps({
+    switchComponent : {},
     url: {
         type: String,
         required: true
     },
 });
-
 function teste(id) {
-    console.log(id);
+    props.switchComponent('details')
 }
 
 onMounted(async () => {
@@ -51,7 +51,7 @@ onMounted(async () => {
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(row, rowIndex) in data" :key="rowIndex" @click="teste(data[rowIndex].id)" class="hover:bg-gray-50">
+        <tr v-for="(row, rowIndex) in data" :key="rowIndex" @click="props.switchComponent('details', data[rowIndex].id )" class="hover:bg-gray-50">
             <td v-for="(value, key) in row" :key="key" :class="{'hidden': key === 'id'}" class="border-b border-slate-100 py-4 pl-2">
                 {{ value }}
             </td>

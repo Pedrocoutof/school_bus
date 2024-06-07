@@ -40,9 +40,9 @@ class DriverController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Driver $driver) : \Illuminate\Http\JsonResponse
     {
-        //
+        return response()->json($driver);
     }
 
     /**
