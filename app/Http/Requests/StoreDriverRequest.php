@@ -24,7 +24,7 @@ class StoreDriverRequest extends FormRequest
         return [
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|unique:drivers|unique:users',
-            'phone' => 'required',
+            'phone' => 'required|min:11|max:11',
             'password' => 'required|min:8|confirmed',
             'city' => 'required',
             'zip_code' => 'required',

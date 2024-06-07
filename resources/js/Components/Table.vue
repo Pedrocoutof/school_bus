@@ -12,6 +12,7 @@ onMounted(async () => {
         hasData.value = response.data.length > 0;
 
         if (hasData.value) {
+            console.log(response.data)
             theads.value = Object.keys(response.data[0]);
             data.value = response.data
         }

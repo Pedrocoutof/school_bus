@@ -14,7 +14,7 @@ class DriverController extends Controller
      */
     public function index(): \Illuminate\Http\JsonResponse
     {
-        $drivers = Driver::select(['full_name as Nome completo', 'email as Email', 'phone as Telefone', 'zip_code as CEP'])->get();
+        $drivers = Driver::select(['full_name as Nome completo', 'email as Email', 'phone as Telefone'])->get();
         return response()->json($drivers);
     }
 
