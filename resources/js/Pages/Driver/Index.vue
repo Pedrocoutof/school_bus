@@ -9,7 +9,9 @@ const components = {
     create: Create,
 };
 
+
 const currentComponent = ref('index');
+const url = 'http://127.0.0.1:8000/api/drivers';
 
 function switchComponent(componentName) {
     currentComponent.value = components[componentName] ? componentName : 'index';
@@ -42,7 +44,7 @@ function switchComponent(componentName) {
             <div class="mt-3 mx-auto sm:px-6">
                 <div class="bg-white overflow-hidden shadow sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        <component :is="components[currentComponent]" :switch-component="switchComponent"/>
+                        <component :is="components[currentComponent]" :switch-component="switchComponent" :url="url" :actions="actions"/>
                     </div>
                 </div>
             </div>
