@@ -4,6 +4,8 @@ import axios from "axios";
 import InputForm from "@/Components/InputForm.vue";
 import FormSection from "@/Components/FormSection.vue";
 
+//teste
+
 function getZipcodeData(zipcode) {
     axios({
         method: "get",
