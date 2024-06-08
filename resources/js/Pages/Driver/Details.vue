@@ -19,11 +19,8 @@ const errors = ref({});
 
 onMounted(async () => {
     try {
-       const response = await axios.get(props.url + "/" + props.id);
-
-        Object.keys(response.data).forEach(
-            (key) => formData.value[key] = response.data[key])
-
+        const response = await axios.get(props.url + "/" + props.id);
+        Object.keys(response.data).forEach((key) => formData.value[key] = response.data[key])
 
     } catch (error) {
         console.error(error);
@@ -52,8 +49,8 @@ onMounted(async () => {
         <FormSection class="mt-6" title="Informações de login" description="Insira as informações básicas de login do motorista.">
             <InputForm :disabled="true" :form="formData" label="Email" type="email" name="email" cols="col-span-2" :errors="errors" />
             <div class="col-span-full"></div>
-            <InputForm :disabled="true" :form="formData" label="Senha" type="password" name="password" cols="col-span-2" :errors="errors" />
-            <InputForm :disabled="true" :form="formData" label="Confirmar senha" type="password" name="password_confirmation" cols="col-span-2" :errors="errors" />
+            <InputForm :hidden="true" :disabled="true" :form="formData" label="Senha" type="password" name="password" cols="col-span-2" :errors="errors" />
+            <InputForm :hidden="true" :disabled="true" :form="formData" label="Confirmar senha" type="password" name="password_confirmation" cols="col-span-2" :errors="errors" />
         </FormSection>
 
 

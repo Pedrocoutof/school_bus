@@ -42,7 +42,6 @@ const formData = ref({
     complement: ''
 });
 function handleSubmit() {
-    console.log(formData.value)
     axios.post('http://127.0.0.1:8000/api/drivers/store', formData.value)
         .then((response) => {
             if (response.status === 201) {
