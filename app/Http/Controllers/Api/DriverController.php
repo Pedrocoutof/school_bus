@@ -57,8 +57,9 @@ class DriverController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Driver $driver)
     {
-        //
+        $driver->delete();
+        return response()->json(null, 204);
     }
 }

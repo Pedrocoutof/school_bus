@@ -11,3 +11,4 @@ Route::get('/user', function (Request $request) {
 Route::get('/drivers', [DriverController::class, 'index'])->name('api.drivers.index');
 Route::get('/drivers/{driver}', [DriverController::class, 'show'])->name('api.drivers.show');
 Route::post('/drivers/store', [DriverController::class, 'store'])->name('api.drivers.store');
+Route::delete('/drivers/{driver}', [DriverController::class, 'destroy'])->name('api.drivers.destroy');
