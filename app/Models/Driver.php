@@ -21,6 +21,7 @@ class Driver extends Authenticatable
         'public_place',
         'state',
         'zip_code',
+        'complement',
     ];
 
     protected $hidden = [

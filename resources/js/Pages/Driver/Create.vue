@@ -4,8 +4,6 @@ import axios from "axios";
 import InputForm from "@/Components/InputForm.vue";
 import FormSection from "@/Components/FormSection.vue";
 
-//teste
-
 function getZipcodeData(zipcode) {
     axios({
         method: "get",
@@ -40,9 +38,11 @@ const formData = ref({
     public_place: '',
     neighborhood: '',
     city: '',
-    state: ''
+    state: '',
+    complement: ''
 });
 function handleSubmit() {
+    console.log(formData.value)
     axios.post('http://127.0.0.1:8000/api/drivers/store', formData.value)
         .then((response) => {
             if (response.status === 201) {
@@ -64,7 +64,7 @@ function handleSubmit() {
     <form @submit.prevent="handleSubmit">
         <FormSection title="Informações básicas" description="Insira as informações básicas de cadastro do motorista.">
             <InputForm :form="formData" label="Nome completo" name="full_name" cols="col-span-2" :errors="errors" />
-            <InputForm maxlength="11" :form="formData" label="Número de telefone" type="number" name="phone" cols="col-span-2" :errors="errors" />
+            <InputForm :maxlength="11" :form="formData" label="Número de telefone" type="number" name="phone" cols="col-span-2" :errors="errors" />
         </FormSection>
 
         <FormSection class="mt-6" title="Informações de endereço" description="Insira as informações básicas de endereço do motorista.">

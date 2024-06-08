@@ -32,6 +32,7 @@ class StoreDriverRequest extends FormRequest
             'number' => 'required',
             'neighborhood' => 'required',
             'state' => 'required',
+            'complement' => 'nullable',
         ];
     }
 
