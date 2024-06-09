@@ -4,7 +4,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import Table from '@/Components/Table.vue';
 import Create from './Create.vue';
 import Details from "@/Pages/Driver/Details.vue";
-import TrashButton from "@/Components/TrashButton.vue";
+import DestroyButton from "@/Components/DestroyButton.vue";
 import EditButton from "@/Components/EditButton.vue";
 
 const components = {
@@ -16,14 +16,6 @@ const components = {
 const currentComponent = ref('index');
 const url = 'http://127.0.0.1:8000/api/drivers';
 const selectedId = ref(null);
-
-function submitDeleteForm() {
-    axios.delete(url + '/' + selectedId.value)
-        .then((response) => {
-            console.log(response);
-            switchComponent('index');
-        }) ;
-}
 
 function switchComponent(componentName, id = null) {
     currentComponent.value = components[componentName] ? componentName : 'index';
@@ -56,9 +48,7 @@ function switchComponent(componentName, id = null) {
                         </a>
                     </div>
                     <div v-if="currentComponent === 'details'" class="flex items-center pr-6 gap-x-4">
-                        <form @submit.prevent="submitDeleteForm">
-                            <TrashButton></TrashButton>
-                        </form>
+                        <DestroyButton :switch-component="switchComponent" :url-destroy="route('api.drivers.destroy', { driver: selectedId })"></DestroyButton>
                     </div>
                 </div>
             </div>
