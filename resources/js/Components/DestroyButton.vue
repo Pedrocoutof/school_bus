@@ -18,11 +18,6 @@ const props = defineProps({
         required: false,
         default: 'Tem certeza que deseja excluir este registro?'
     },
-    passwordConfirmation: {
-        type: Boolean,
-        required: false,
-        default: false
-    },
     urlDestroy: {
         type: String,
         required: true
@@ -32,6 +27,7 @@ const props = defineProps({
         default: "index"
     },
     switchComponent:{
+        type: Function,
         required: true
     }
 });
