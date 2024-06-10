@@ -28,6 +28,8 @@ const ToggleMenu = () => {
                 <SidebarLink href="/students" :active="route().current('students')" :title="'Estudantes'" :icon="'school'"/>
                 <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
                 <SidebarLink href="/drivers" :active="route().current('drivers.index')" :title="'Motoristas'" :icon="'car_rental'"/>
+                <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
+                <SidebarLink href="/routes" :active="route().current('routes.index')" :title="'Rotas'" :icon="'route'"/>
             </div>
             <div v-else>
                 <button class="menu-toggle size-12 border-2 rounded-xl ml-6 bg-white hover:bg-gray-100" @click="ToggleMenu">
@@ -39,6 +41,7 @@ const ToggleMenu = () => {
                 <MiniSidebarLink icon="directions_bus" href="/busses" :active="route().current('busses')"/>
                 <MiniSidebarLink icon="school" href="/students" :active="route().current('students')"/>
                 <MiniSidebarLink icon="car_rental" href="/drivers" :active="route().current('drivers.index')"/>
+                <MiniSidebarLink icon="route" href="/routes" :active="route().current('routes.index')"/>
             </div>
 
         </div>
