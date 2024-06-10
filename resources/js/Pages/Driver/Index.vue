@@ -5,7 +5,6 @@ import Table from '@/Components/Table.vue';
 import Create from './Create.vue';
 import Details from "@/Pages/Driver/Details.vue";
 import DestroyButton from "@/Components/DestroyButton.vue";
-import EditButton from "@/Components/EditButton.vue";
 
 const components = {
     index: Table,
