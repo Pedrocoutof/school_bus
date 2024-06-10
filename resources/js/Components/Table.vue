@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import axios from "axios"; // Certifique-se de importar o axios
+import axios from "axios";
 
 const theads = ref([]);
 const data = ref([]);
@@ -13,9 +13,6 @@ const props = defineProps({
         required: true
     },
 });
-function teste(id) {
-    props.switchComponent('details')
-}
 
 onMounted(async () => {
     try {

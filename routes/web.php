@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RouteController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Middleware\CheckMultipleGuards;
@@ -20,6 +21,7 @@ Route::middleware(CheckMultipleGuards::class)->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/drivers', [DriverController::class, 'index'])->name('drivers.index');
+    Route::get('/routes', [RouteController::class, 'index'])->name('routes.index');
 });
 
 Route::get('/vue', function () {
