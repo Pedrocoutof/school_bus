@@ -1,10 +1,12 @@
 <script setup>
+import FormSection from "@/Components/FormSection.vue";
 
 </script>
 
 <template>
     <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
 
+        <FormSection title=""></FormSection>
         <!-- Item #1 -->
         <div class="relative">
             <div class="md:flex items-center md:space-x-4 mb-3">
