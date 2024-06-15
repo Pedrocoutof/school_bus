@@ -4,13 +4,19 @@ import { defineProps } from "vue";
 const props = defineProps(
     {
         '_class':{},
-        'label':{},
+        'label':{
+            required: true
+        },
         'type':{
             default: 'text'
         },
-        'name':{},
-        'form':{},
-        'cols':{},
+        'name':{
+            required: true},
+        'form':{
+            required: true},
+        'cols':{
+            default: 'col-span-full'
+        },
         'errors':{},
         'maxlength':{},
         'disabled':{

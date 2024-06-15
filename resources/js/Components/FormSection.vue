@@ -1,6 +1,6 @@
 <script setup>
 
-const props = defineProps(['title', 'description'])
+const props = defineProps(['title', 'description', 'cols'])
 
 </script>
 

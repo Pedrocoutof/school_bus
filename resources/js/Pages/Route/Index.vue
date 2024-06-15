@@ -3,14 +3,13 @@
 import DestroyButton from "@/Components/DestroyButton.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Table from "@/Components/Table.vue";
-import Create from "@/Pages/Driver/Create.vue";
+import Create from "@/Pages/Route/Create.vue";
 import Details from "@/Pages/Route/Details.vue";
 import {ref} from "vue";
-import Timeline from "@/Pages/Route/Timeline.vue";
 
 const components = {
     index: Table,
-    create: Timeline,
+    create: Create,
     details: Details
 };
 
@@ -39,8 +38,8 @@ function switchComponent(componentName, id = null) {
                         </a>
                         <div class="flex items-center">
                             <div  v-if="currentComponent !== 'index'" >></div>
-                            <div  v-if="currentComponent === 'create'" class="p-6 text-gray-700">Adicionando motorista</div>
-                            <div  v-if="currentComponent === 'details'" class="p-6 text-gray-700">Detalhes do motorista</div>
+                            <div  v-if="currentComponent === 'create'" class="p-6 text-gray-700">Adicionando rota</div>
+                            <div  v-if="currentComponent === 'details'" class="p-6 text-gray-700">Detalhes da rota</div>
                         </div>
                     </div>
                     <div v-if="currentComponent === 'index'" class="flex items-center pr-6">
