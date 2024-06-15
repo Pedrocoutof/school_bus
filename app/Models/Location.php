@@ -12,6 +12,13 @@ class Location extends Model
 {
     use HasFactory, HasSpatial;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'coordinates',
+        'hour'
+    ];
+
     protected $casts = [
         'coordinates' => Point::class
     ];

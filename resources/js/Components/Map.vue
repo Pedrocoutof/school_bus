@@ -39,7 +39,6 @@ onMounted(() => {
             .setContent("Latitude: " + lat + " <br> Longitude: " + lng)
             .openOn(map);
 
-        //console.log("Latitude: " + lat + ", Longitude: " + lng);
     });
 });
 </script>

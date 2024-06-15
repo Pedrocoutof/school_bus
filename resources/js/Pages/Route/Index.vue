@@ -1,6 +1,4 @@
 <script setup>
-
-import DestroyButton from "@/Components/DestroyButton.vue";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import Table from "@/Components/Table.vue";
 import Create from "@/Pages/Route/Create.vue";

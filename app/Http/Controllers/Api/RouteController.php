@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Location;
 use App\Models\Route;
+use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use MatanYadaev\EloquentSpatial\Objects\Point;
 
 class RouteController extends Controller
 {
@@ -22,7 +27,48 @@ class RouteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'routeTitle' => 'required',
+            'routeDescription' => 'required',
+            'points.*.title' => 'required|string',
+            'points.*.description' => 'required|string',
+            'points.*.hour' => 'required',
+            'points.*.lat' => 'required',
+            'points.*.lng' => 'required',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            $createdRoute = Route::create([
+                'title' => $validatedData['routeTitle'],
+                'description' => $validatedData['routeDescription'],
+            ]);
+
+            foreach ($validatedData['points'] as $key => $point) {
+                $location = Location::create([
+                    'title' => $point['title'],
+                    'description' => $point['description'],
+                    'hour' => $point['hour'],
+                    'coordinates' => DB::raw("ST_GeomFromText('POINT(".$point['lng']." ".$point['lat'].")')"),
+                ]);
+
+                $createdRoute->locations()->attach($location->id, [
+                    'order' => $key,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }
+
+            DB::commit();
+
+            return response()->json(['message' => 'Rota e pontos criados com sucesso.'], 201);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json(['error' => 'Erro ao criar rota e pontos.'], 500);
+        }
     }
 
     /**
@@ -31,7 +77,7 @@ class RouteController extends Controller
     public function show(string $id)
     {
         $route = Route::with('locations')->findOrFail($id);
-        // Limpa os dados para evitar problemas de codificação
+
         $routeArray = $route->toArray();
         array_walk_recursive($routeArray, function (&$item) {
             if (is_string($item)) {

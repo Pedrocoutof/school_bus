@@ -10,6 +10,11 @@ class Route extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'description'
+    ];
+
     public function locations(): BelongsToMany
     {
         return $this->belongsToMany(Location::class, 'route_location', 'route_id', 'location_id')->withPivot('order')->withTimestamps();

@@ -1,7 +1,6 @@
 <script setup>
 import FormSection from "@/Components/FormSection.vue";
 import {ref} from "vue";
-import InputMapPoint from "@/Components/InputMapPoint.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import DangerButton from "@/Components/DangerButton.vue";
 import TextInput from "@/Components/TextInput.vue";
@@ -13,13 +12,30 @@ const routeTitle = ref('')
 const routeDescription = ref('')
 const points = ref([]);
 
-function printData () {
-    console.log(routeTitle.value)
-    console.log(routeDescription.value)
-    console.log(points.value)
-}
-
+const props = defineProps(['switchComponent']);
+console.log(props)
 function onSubmit() {
+    let body = {
+        routeTitle: routeTitle.value,
+        routeDescription: routeDescription.value,
+        points: points.value.map((point) => ({
+            "title": point.title,
+            "description": point.description,
+            "hour": point.hour,
+            "lat": point.lat,
+            "lng": point.lng,
+        }))
+    };
+    console.log(body)
+    axios.post(route('api.routes.store'), body).then((e) =>{
+
+        if(e.status === 201) {
+            props.switchComponent('index');
+        } else {
+            console.log(e)
+        }
+
+    })
 }
 
 function onRemove(index) {
@@ -27,7 +43,7 @@ function onRemove(index) {
 }
 
 function addPoint() {
-    points.value.push({ title: '', description: '', hours: '' });
+    points.value.push({ title: '', description: '', hour: '', lat:'', lng:'' });
 }
 
 async function fillForm({latlng}, index)  {
@@ -42,7 +58,10 @@ async function fillForm({latlng}, index)  {
             lon: lng
         }
     });
-    console.log(response.data.address)
+
+    points.value[index].lat = lat;
+    points.value[index].lng = lng;
+
     points.value[index].description = response.data.name ? response.data.name + " - (" + (response.data.address.town || response.data.address.city) + ")" :  ""
 }
 
@@ -89,7 +108,7 @@ async function fillForm({latlng}, index)  {
 
     </FormSection>
 
-    <PrimaryButton @click="printData">Salvar</PrimaryButton>
+    <PrimaryButton @click="onSubmit">Salvar</PrimaryButton>
 
 </template>
 
