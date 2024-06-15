@@ -78,13 +78,7 @@ class RouteController extends Controller
     {
         $route = Route::with('locations')->findOrFail($id);
 
-        $routeArray = $route->toArray();
-        array_walk_recursive($routeArray, function (&$item) {
-            if (is_string($item)) {
-                $item = utf8_encode($item);
-            }
-        });
-        return response()->json($routeArray);
+        return response()->json($route);
     }
 
     /**
