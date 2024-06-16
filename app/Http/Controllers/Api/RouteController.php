@@ -19,8 +19,21 @@ class RouteController extends Controller
      */
     public function index()
     {
-        $routes = Route::select(['title as Título', 'id'])->get();
+        //$routes = Route::select(['title as Título', 'id', 'description as Descrição'])->get();
+        $routes = Route::with('locations')->get();
+
+        $routes->transform(function ($route) {
+            return [
+                'Titulo' => $route->title,
+                'id' => $route->id,
+                'Descrição' => $route->description,
+                'Primeira parada' => $route->locations->first()['title'],
+                'Última parada' => $route->locations->last()['title']
+            ];
+        });
+
         return response()->json($routes);
+
     }
 
     /**
