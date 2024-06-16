@@ -4,6 +4,7 @@ import Table from "@/Components/Table.vue";
 import Create from "@/Pages/Route/Create.vue";
 import Details from "@/Pages/Route/Details.vue";
 import {ref} from "vue";
+import DestroyButton from "@/Components/DestroyButton.vue";
 
 const components = {
     index: Table,
@@ -48,7 +49,7 @@ function switchComponent(componentName, id = null) {
                         </a>
                     </div>
                     <div v-if="currentComponent === 'details'" class="flex items-center pr-6 gap-x-4">
-<!--                        <DestroyButton :switch-component="switchComponent" :url-destroy="route('api.drivers.destroy', { driver: selectedId })"></DestroyButton>-->
+                        <DestroyButton :switch-component="switchComponent" :url-destroy="route('api.routes.destroy', { route: selectedId })"></DestroyButton>
                     </div>
                 </div>
             </div>

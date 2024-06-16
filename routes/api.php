@@ -17,3 +17,4 @@ Route::delete('/drivers/{driver}', [DriverController::class, 'destroy'])->name('
 Route::get('/routes', [RouteController::class, 'index'])->name('api.routes.index');
 Route::post('/routes', [RouteController::class, 'store'])->name('api.routes.store');
 Route::get('/routes/{id}', [RouteController::class, 'show'])->name('api.routes.show');
+Route::delete('/routes/{route}', [RouteController::class, 'destroy'])->name('api.routes.destroy');
