@@ -17,7 +17,8 @@ class RouteFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => "Rota - " . $this->faker->numberBetween(0, 100),
+            "description" => $this->faker->text(150),
         ];
     }
 }
