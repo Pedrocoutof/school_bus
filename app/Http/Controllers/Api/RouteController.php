@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use MatanYadaev\EloquentSpatial\Objects\Point;
+use mysql_xdevapi\Exception;
 
 class RouteController extends Controller
 {
@@ -99,7 +100,21 @@ class RouteController extends Controller
      */
     public function destroy(Route $route)
     {
-        $route->delete();
-        return response()->json(null, 204);
+        DB::beginTransaction();
+        try {
+            $locationIds = $route->locations()->pluck('locations.id');
+
+            foreach($locationIds as $locationId) {
+                Location::findOrFail($locationId)->delete();
+            }
+
+            $route->delete();
+            DB::commit();
+            return response()->json(null, 204);
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            return response()->json(['error' => 'Erro ao deletar rota e pontos.'], 500);
+    }
     }
 }
