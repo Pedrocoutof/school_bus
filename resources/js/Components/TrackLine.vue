@@ -20,6 +20,7 @@ function getIcon(index) {
     <timeline-item v-for="(location, index) in props.locations"
                    :title="location.title"
                    :description="location.description"
+                   :hour="location.hour"
                    :icon="getIcon(index)">
     </timeline-item>
 </template>

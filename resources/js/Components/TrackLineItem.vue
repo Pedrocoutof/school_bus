@@ -12,6 +12,10 @@ const props = defineProps({
         type: String,
         default: "",
         required: false
+    },
+    'hour': {
+        type: String,
+        required: true
     }
 })
 </script>
@@ -29,7 +33,7 @@ const props = defineProps({
             </div>
             <!-- Title -->
             <div class="text-slate-500 ml-14"><span class="text-slate-900 font-bold">{{ props.title }}</span>
-            <!--{{props.description}}-->
+            às {{props.hour}}
             </div>
         </div>
         <!-- Card -->

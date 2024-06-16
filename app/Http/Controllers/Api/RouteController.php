@@ -30,11 +30,16 @@ class RouteController extends Controller
         $validatedData = $request->validate([
             'routeTitle' => 'required',
             'routeDescription' => 'required',
+            'points' => 'required|array|min:2',
             'points.*.title' => 'required|string',
             'points.*.description' => 'required|string',
             'points.*.hour' => 'required',
             'points.*.lat' => 'required',
             'points.*.lng' => 'required',
+        ], [
+            'points' => "Selecione pelo menos dois pontos para criar uma rota.",
+            'points.*.lat' => "Selecione o ponto de parada no mapa.",
+            'points.*.lng' => "Selecione o ponto de parada no mapa."
         ]);
 
         DB::beginTransaction();
