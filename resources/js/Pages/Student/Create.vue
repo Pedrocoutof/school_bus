@@ -7,9 +7,19 @@ import {ref} from "vue"
 import SecondaryButton from "@/Components/SecondaryButton.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import InputForm from "@/Components/InputForm.vue";
+import {getViaCepData} from "@/Utils/getViaCepData.js";
 
-function searchZipCode() {}
+async function fillFiels() {
+    const cepData = await getViaCepData(form.value.zip_code);
 
+    if(cepData) {
+        form.value.city = cepData.localidade
+        form.value.public_place = cepData.logradouro
+        form.value.state = cepData.uf
+        form.value.neighborhood = cepData.bairro
+    }
+
+}
 
 const errors = ref(null);
 const form = ref({
@@ -44,7 +54,7 @@ const form = ref({
 
         <div class="col-span-2 w-full">
             <InputLabel value="CEP"></InputLabel>
-            <TextInput class="w-full" @keyup="searchZipCode" v-mask="'00000-000'" v-model="form.zip_code"></TextInput>
+            <TextInput class="w-full" @keyup="fillFiels" v-mask="'00000-000'" v-model="form.zip_code"></TextInput>
             <InputError v-if="errors && errors.zip_code" :message="errors.zip_code[0]"></InputError>
         </div>
 
@@ -62,21 +72,21 @@ const form = ref({
             <InputError v-if="errors && errors.public_place" :message="errors.public_place[0]"></InputError>
         </div>
 
-        <div class="col-span-3">
+        <div class="col-span-1">
             <InputLabel value="Estado"></InputLabel>
             <TextInput class="w-full" v-model="form.state"></TextInput>
             <InputError v-if="errors && errors.state" :message="errors.state[0]"></InputError>
         </div>
 
 
-        <div class="col-span-3 w-full">
+        <div class="col-span-2 w-full">
             <InputLabel value="Bairro"></InputLabel>
             <TextInput class="w-full" v-model="form.neighborhood"></TextInput>
             <InputError v-if="errors && errors.neighborhood" :message="errors.neighborhood[0]"></InputError>
         </div>
 
 
-        <div class="col-span-3 w-full">
+        <div class="col-span-1 w-full">
             <InputLabel value="Número"></InputLabel>
             <TextInput class="w-full" v-model="form.number"></TextInput>
             <InputError v-if="errors && errors.number" :message="errors.number[0]"></InputError>
@@ -84,7 +94,7 @@ const form = ref({
 
 
 
-        <div class="col-span-3 w-full">
+        <div class="col-span-5 w-full">
             <InputLabel value="Complemento"></InputLabel>
             <TextInput class="w-full" v-model="form.complement"></TextInput>
             <InputError v-if="errors && errors.complement" :message="errors.complement[0]"></InputError>
