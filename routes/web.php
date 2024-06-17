@@ -3,6 +3,7 @@
 use App\Http\Controllers\DriverController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Middleware\CheckMultipleGuards;
@@ -13,7 +14,6 @@ Route::get('/', function () {
 });
 
 Route::middleware(CheckMultipleGuards::class)->group(function () {
-
     Route::get('/dashboard', function () { return Inertia::render('Dashboard'); })->name('dashboard');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -22,6 +22,7 @@ Route::middleware(CheckMultipleGuards::class)->group(function () {
 
     Route::get('/drivers', [DriverController::class, 'index'])->name('drivers.index');
     Route::get('/routes', [RouteController::class, 'index'])->name('routes.index');
+    Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 });
 
 Route::get('/vue', function () {

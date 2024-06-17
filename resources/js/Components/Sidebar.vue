@@ -20,12 +20,13 @@ const ToggleMenu = () => {
                 <button class="flex justify-start items-center text-gray-600 w-full hover:bg-gray-100 border-l-4 border-transparent" @click="ToggleMenu">
                     <span class="material-icons-outlined m-4">close</span><span class="font-medium">Fechar</span>
                 </button>
+
                 <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
                 <SidebarLink href="/dashboard" :active="route().current('dashboard')" :title="'Painel de controle'" :icon="'dashboard'"/>
                 <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
                 <SidebarLink href="/busses" :active="route().current('busses')" :title="'Ônibus'" :icon="'directions_bus'"/>
                 <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
-                <SidebarLink href="/students" :active="route().current('students')" :title="'Estudantes'" :icon="'school'"/>
+                <SidebarLink :href="route('students.index')" :active="route().current('students.index')" :title="'Estudantes'" :icon="'school'"/>
                 <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
                 <SidebarLink href="/drivers" :active="route().current('drivers.index')" :title="'Motoristas'" :icon="'car_rental'"/>
                 <hr class="text-gray-400 h-0.5 w-4/5 m-auto">
@@ -39,7 +40,7 @@ const ToggleMenu = () => {
 
                 <MiniSidebarLink icon="dashboard" href="/dashboard" :active="route().current('dashboard')"/>
                 <MiniSidebarLink icon="directions_bus" href="/busses" :active="route().current('busses')"/>
-                <MiniSidebarLink icon="school" href="/students" :active="route().current('students')"/>
+                <MiniSidebarLink icon="school" href="/students" :active="route().current('students.index')"/>
                 <MiniSidebarLink icon="car_rental" href="/drivers" :active="route().current('drivers.index')"/>
                 <MiniSidebarLink icon="route" href="/routes" :active="route().current('routes.index')"/>
             </div>

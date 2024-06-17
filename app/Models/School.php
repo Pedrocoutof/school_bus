@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class School extends Model
 {
@@ -11,6 +12,10 @@ class School extends Model
         'name',
         'city'
     ];
+
+    public function students(): HasMany {
+        return $this->hasMany(Student::class);
+    }
 
     use HasFactory;
 }

@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
             DriverSeeder::class,
             LocationsSeeder::class,
             RouteSeeder::class,
-            RouteLocationSeeder::class
+            RouteLocationSeeder::class,
+            SchoolSeeder::class,
+            StudentSeeder::class
         ]);
     }
 }
