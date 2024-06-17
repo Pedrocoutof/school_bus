@@ -21,7 +21,7 @@ class StudentFactory extends Factory
         return [
             'full_name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => Hash::make('12345678'),
+            'password' => bcrypt('12345678'),
             'neighborhood' => $this->faker->streetSuffix(),
             'city' => $this->faker->city(),
             'number' => $this->faker->buildingNumber(),

@@ -45,6 +45,10 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('dashboard');
         }
 
+        else if(Auth::guard('student')->attempt($credencials)) {
+            return redirect()->route('dashboard');
+        }
+
         return redirect()->route('login');
 
     }

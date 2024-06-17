@@ -45,6 +45,11 @@ return [
             'driver' => 'session',
             'provider' => 'drivers',
         ],
+
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'students',
+        ],
     ],
 
     /*
@@ -70,10 +75,15 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
-         'drivers' => [
-             'driver' => 'eloquent',
-             'model' => \App\Models\Driver::class,
-         ],
+        'drivers' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Driver::class,
+        ],
+
+        'students' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Student::class,
+        ],
     ],
 
     /*

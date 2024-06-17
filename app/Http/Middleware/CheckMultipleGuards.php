@@ -16,7 +16,7 @@ class CheckMultipleGuards
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::guard('driver')->check() || Auth::guard('web')->check()) {
+        if (Auth::guard('driver')->check() || Auth::guard('web')->check() || Auth::guard('student')->check()) {
             return $next($request);
         }
 
