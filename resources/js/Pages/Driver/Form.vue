@@ -40,14 +40,14 @@ function searchZipCode() {
         <FormSection title="Informações básicas" description="Insira as informações básicas de cadastro do motorista.">
             <InputForm :disabled="isDisabled" :form="formData" label="Nome completo" name="full_name" cols="col-span-2"
                        :errors="errors"/>
-            <InputForm :disabled="isDisabled" maxlength="11" :form="formData" label="Número de telefone" type="number"
-                       name="phone" cols="col-span-2" :errors="errors"/>
+            <InputForm :disabled="isDisabled" :form="formData" label="Número de telefone" type="text"
+                       v-mask="'(00) 00000-0000'" name="phone" cols="col-span-2" :errors="errors"/>
         </FormSection>
 
         <FormSection class="mt-6" title="Informações de endereço"
                      description="Insira as informações básicas de endereço do motorista.">
-            <InputForm :disabled="isDisabled" maxlength="8" @keyup="searchZipCode" :form="formData" label="CEP"
-                       type="number" name="zip_code" cols="col-span-2" :errors="errors"/>
+            <InputForm :disabled="isDisabled" @keyup="searchZipCode" :form="formData" label="CEP"
+                       type="text" v-mask="'00000-000'" name="zip_code" cols="col-span-2" :errors="errors"/>
             <InputForm :disabled="isDisabled" :form="formData" label="Cidade" name="city" cols="col-span-2"
                        :errors="errors"/>
             <InputForm :disabled="isDisabled" :form="formData" label="Logradouro" name="public_place" cols="col-span-2"
