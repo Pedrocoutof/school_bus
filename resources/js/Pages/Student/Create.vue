@@ -101,7 +101,7 @@ const form = ref({
         </div>
     </FormSection>
 
-    <div class="mt-6 flex items-center justify-end gap-x-6 col-span-full justify-end">
+    <div class="mt-6 flex items-center gap-x-6 col-span-full justify-end">
         <SecondaryButton> Cancelar </SecondaryButton>
         <PrimaryButton> Salvar </PrimaryButton>
     </div>
