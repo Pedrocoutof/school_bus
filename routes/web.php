@@ -12,6 +12,7 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return redirect(route('dashboard'));
 });
+//
 
 Route::middleware(CheckMultipleGuards::class)->group(function () {
     Route::get('/dashboard', function () { return Inertia::render('Dashboard'); })->name('dashboard');
